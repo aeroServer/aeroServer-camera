@@ -28,7 +28,7 @@ class Shot extends Command
      */
     public function handle()
     {
-        $cmd = "libcamera-still -t 5000 -n -o tmp.jpg --autofocus-on-capture -q 97 --hdr 1";
+        $cmd = "libcamera-still -t 5000 -n -o ". __DIR__ ."/tmp.jpg --autofocus-on-capture -q 97 --hdr 1";
         shell_exec($cmd);
     }
 
