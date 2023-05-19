@@ -12,14 +12,14 @@ class Shot extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'shot';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'take a picture from camera';
 
     /**
      * Execute the console command.
@@ -28,7 +28,8 @@ class Shot extends Command
      */
     public function handle()
     {
-        //
+        $cmd = "libcamera-still -t 5000 -n -o tmp.jpg --autofocus-on-capture -q 97 --hdr 1";
+        shell_exec($cmd);
     }
 
     /**
