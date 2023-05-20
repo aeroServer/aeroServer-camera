@@ -4,6 +4,9 @@ namespace App\Commands;
 
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
+use App\parameters;
+use App\jpeg;
+use Storage;
 
 class Shot extends Command
 {
@@ -28,9 +31,16 @@ class Shot extends Command
      */
     public function handle()
     {
-        $this->info( __DIR__ ."/tmp.jpg");
-        $cmd = "libcamera-still -t 5000 -n -o ". __DIR__ ."/tmp.jpg --autofocus-on-capture -q 97 --hdr 1";
+
+        $dest = "". __DIR__ ."/../../storage/app/tmp/tmp.jpg";
+        if (!Storage::exists('tmp')) {
+            Storage::makeDirectory('tmp');
+        }
+        $this->info($dest);
+        $cmd = "libcamera-still -t 5000 -n -o $dest --autofocus-on-capture -q ".parameters::get('jpeg quality', 97)." --hdr 1";
+        
         shell_exec($cmd);
+        jpeg::postProccess('tmp/tmp.jpg');
     }
 
     /**
