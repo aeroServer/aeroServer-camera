@@ -10,6 +10,7 @@ class parameters
 	public $data = null;
 	private $updateTime = 60;
 	private $filePath = 'parameters.json';
+	private $protectedParameters = ['UPDATE'];
 
 	function __construct()
 	{
@@ -33,9 +34,9 @@ class parameters
 		}
 	}
 
-	private function write(String $name, $default)
+	private function write(String $name, $value)
 	{
-		$this->data[$name] = $default;
+		$this->data[$name] = $value;
 		Storage::put($this->filePath, json_encode($this->data, JSON_PRETTY_PRINT));
 	}
 
@@ -50,5 +51,27 @@ class parameters
 		}
 	}
 
+	public static function getUpdate(String $name, $value = null)
+	{
+		$pa = new self();
+		if (isset($pa->data[$name]) && !in_array($name, $pa->protectedParameters)) {
+			if (!is_null($value)) {
+				$type = gettype($pa->data[$name]);
+				if (settype($value, $type)) {
+					$pa->write($name, $value);
+				} else {
+					return null;
+				}
+			}
+			return $pa->data[$name];
+		} else {
+			return null;
+		}
+	}
 
+	public static function getAll()
+	{
+		$pa = new self();
+		return $pa->data;
+	}
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App;
 use Storage;
+use App\linuxExif;
 
 /**
  * 
@@ -16,7 +17,10 @@ class jpeg
             $postProccess = true;
         }
         if ($postProccess) {
-            imagejpeg($GD, Storage::path($path), parameters::get('jpeg quality', 97));
+            imagejpeg($GD, Storage::path($path.'-NOEXIF'), parameters::get('jpeg quality', 97));
+            self::transferExif2File($path, $path.'-NOEXIF');
+            Storage::copy($path.'-NOEXIF', $path);
+            
         }
         
     }
@@ -24,5 +28,15 @@ class jpeg
     public static function rotate($GD, $degrees)
     {
         return imagerotate($GD, $degrees, 0);
+    }
+
+    public static function transferExif2File($srcfile, $destfile) 
+    {   
+        $srcData = linuxExif::read($srcfile);
+        
+        $transfertTag = ['Make', 'Model', 'ISO', 'DateTimeOriginal', 'SubjectDistance'];
+        foreach ($transfertTag as $key => $tag) {
+            linuxExif::write($destfile, $tag, $srcData->$tag);
+        }
     }
 }

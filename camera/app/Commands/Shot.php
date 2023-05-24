@@ -6,6 +6,9 @@ use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 use App\parameters;
 use App\jpeg;
+use App\picture;
+use App\apiServer;
+
 use Storage;
 
 class Shot extends Command
@@ -36,11 +39,17 @@ class Shot extends Command
         if (!Storage::exists('tmp')) {
             Storage::makeDirectory('tmp');
         }
-        $this->info($dest);
+        $this->info('Get picture from camera');
         $cmd = "libcamera-still -t 5000 -n -o $dest --autofocus-on-capture -q ".parameters::get('jpeg quality', 97)." --hdr 1";
-        
         shell_exec($cmd);
+        $this->info('Post processing');
         jpeg::postProccess('tmp/tmp.jpg');
+        $this->info('Save to database');
+        $picture = picture::add('tmp/tmp.jpg');
+        if (!is_null(parameters::get('api server url', null))) {
+            apiServer::sendPicture($picture);
+        }
+
     }
 
     /**

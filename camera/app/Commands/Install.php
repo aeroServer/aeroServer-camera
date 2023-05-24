@@ -21,6 +21,8 @@ class Install extends Command
      */
     protected $description = 'Command description';
 
+    protected $dependancy = ['php-gd', 'exif'];
+
     /**
      * Execute the console command.
      *
