@@ -36,6 +36,7 @@ class Shot extends Command
     {
 
         $dest = "". __DIR__ ."/../../storage/app/tmp/tmp.jpg";
+        Storage::deleteDirectory('tmp');
         if (!Storage::exists('tmp')) {
             Storage::makeDirectory('tmp');
         }
