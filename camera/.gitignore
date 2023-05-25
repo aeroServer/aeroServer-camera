@@ -3,3 +3,4 @@
 /.vagrant
 .phpunit.result.cache
 /database/database.sqlite
+/storage/app/*
