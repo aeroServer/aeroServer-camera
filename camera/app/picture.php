@@ -64,9 +64,14 @@ class picture extends Model
             $postProcess = true;
         }
 
+        if (parameters::get('jpeg add application info', true)) {
+            $GD = jpeg::addApplicationInfo($GD);
+            $postProcess = true;
+        }
 
 
-        if ($postProccess) {
+
+        if ($postProcess) {
             imagejpeg($GD, Storage::path($this->filename.'-NOEXIF'), parameters::get('jpeg quality', 97));
             jpeg::transferExif2File($this->filename, $this->filename.'-NOEXIF');
             Storage::copy($this->filename.'-NOEXIF', $this->filename);
