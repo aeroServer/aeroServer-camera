@@ -25,6 +25,7 @@ class picture extends Model
             Storage::copy($path, $picture->filename);
             $picture->save();
             $picture->writeExif();
+            $picture->postProcessJpeg();
             return $picture;
         }
     }
@@ -41,11 +42,35 @@ class picture extends Model
     public function writeExif()
     {
         linuxExif::write($this->filename, 'ProcessingSoftware', 'aeroServer-camera V0.9');
-
     }
 
     public function getCurlFileAttribute()
     {
         return curl_file_create(Storage::path($this->filename), 'image/jpeg', 'picture.jpg');
+    }
+
+    public function getGdAttribute()
+    {
+        return imagecreatefromjpeg(Storage::path($this->filename));
+    }
+
+    public function postProcessJpeg()
+    {
+        $GD = $this->gd;
+        $postProcess = false;
+
+        if (parameters::get('jpeg add Date', true)) {
+            $GD = jpeg::addDateTime($GD, $this->date);
+            $postProcess = true;
+        }
+
+
+
+        if ($postProccess) {
+            imagejpeg($GD, Storage::path($this->filename.'-NOEXIF'), parameters::get('jpeg quality', 97));
+            jpeg::transferExif2File($this->filename, $this->filename.'-NOEXIF');
+            Storage::copy($this->filename.'-NOEXIF', $this->filename);
+            Storage::delete($this->filename.'-NOEXIF');
+        }
     }
 }
