@@ -40,6 +40,10 @@ class apiServer
     {
         if ($curl->error) {
             echo 'Error: ' . $curl->errorMessage . "\n";
+            if (isset($curl->response) && isset($curl->response->message)) {
+                echo $curl->response->message. "\n";
+            }
+            
         } else {
             echo 'Success' . "\n";
         }
