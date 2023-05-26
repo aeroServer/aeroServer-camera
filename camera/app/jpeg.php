@@ -52,7 +52,7 @@ class jpeg
 
     public static function addApplicationInfo($GD)
     {
-        $GD = self::drawText($GD, config('app.name').' '.config('app.version'), 90, 99.5);
+        $GD = self::drawText($GD, config('app.name').' '.config('app.version'), 80, 99.5);
         return $GD;
     }
 
