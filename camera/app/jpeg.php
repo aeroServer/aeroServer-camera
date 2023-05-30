@@ -23,9 +23,7 @@ class jpeg
             imagejpeg($GD, Storage::path($path.'-NOEXIF'), parameters::get('jpeg quality', 97));
             self::transferExif2File($path, $path.'-NOEXIF');
             Storage::copy($path.'-NOEXIF', $path);
-            
         }
-        
     }
 
     public static function rotate($GD, $degrees)

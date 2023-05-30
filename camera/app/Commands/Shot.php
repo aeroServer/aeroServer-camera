@@ -8,6 +8,7 @@ use App\parameters;
 use App\jpeg;
 use App\picture;
 use App\apiServer;
+use App\clean;
 
 use Storage;
 
@@ -40,6 +41,8 @@ class Shot extends Command
         if (!Storage::exists('tmp')) {
             Storage::makeDirectory('tmp');
         }
+        $this->info('Clean directory if necessary.');
+        clean::deleteOldFile('pictures', parameters::get('disk free for automatic clean', 1));
         $this->info('Get picture from camera');
         $cmd = "libcamera-still -t 5000 -n -o $dest --autofocus-on-capture -q ".parameters::get('jpeg quality', 97)." --hdr 1";
         shell_exec($cmd);
