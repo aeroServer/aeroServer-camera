@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '299da94cf291b23f19ceefc821d69bf8b829c914',
+        'reference' => '0d62a4b7f4c20c741b9249969e86543c04ddb1f9',
         'name' => 'laravel-zero/laravel-zero',
         'dev' => true,
     ),
@@ -193,6 +193,15 @@
             'reference' => '8168361548b2c5e2e501096cfbadb62a4a526290',
             'dev_requirement' => false,
         ),
+        'illuminate/log' => array(
+            'pretty_version' => 'v9.52.7',
+            'version' => '9.52.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../illuminate/log',
+            'aliases' => array(),
+            'reference' => '6c18bd95576ae85ef5144b96c73a0973b92f78b2',
+            'dev_requirement' => false,
+        ),
         'illuminate/macroable' => array(
             'pretty_version' => 'v9.52.7',
             'version' => '9.52.7.0',
@@ -277,7 +286,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '299da94cf291b23f19ceefc821d69bf8b829c914',
+            'reference' => '0d62a4b7f4c20c741b9249969e86543c04ddb1f9',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(
@@ -324,6 +333,15 @@
             'aliases' => array(),
             'reference' => 'e92dcc83d5a51851baf5f5591d32cb2b16e3684e',
             'dev_requirement' => true,
+        ),
+        'monolog/monolog' => array(
+            'pretty_version' => '2.9.1',
+            'version' => '2.9.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../monolog/monolog',
+            'aliases' => array(),
+            'reference' => 'f259e2b15fb95494c83f52d3caad003bbf5ffaa1',
+            'dev_requirement' => false,
         ),
         'mtdowling/cron-expression' => array(
             'dev_requirement' => false,
@@ -539,6 +557,7 @@
             'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0|2.0|3.0',
+                1 => '1.0.0 || 2.0.0 || 3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
