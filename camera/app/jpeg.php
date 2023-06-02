@@ -37,7 +37,9 @@ class jpeg
         
         $transfertTag = ['Make', 'Model', 'ISO', 'DateTimeOriginal', 'SubjectDistance'];
         foreach ($transfertTag as $key => $tag) {
-            linuxExif::write($destfile, $tag, $srcData->$tag);
+            if (isset($srcData->$tag)) {
+                linuxExif::write($destfile, $tag, $srcData->$tag);
+            }
         }
     }
 

@@ -5,6 +5,7 @@ namespace App\Commands;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 use App\parameters;
+use App\Camera\Device;
 
 class Config extends Command
 {
@@ -32,6 +33,13 @@ class Config extends Command
         if ($this->argument('parameters') == 'ALL') {
             foreach (parameters::getAll() as $key => $value) {
                 $this->info("$key=$value");
+            }
+        } elseif ($this->argument('parameters') == 'device') {
+            $this->info('Current device : '.parameters::get('device', 'raspistill'));
+            $this->table(['id', 'device'], Device::list());
+            $newDeviceId = intval($this->ask('New device [0-'.(count(Device::list())-1).']?'));
+            if (isset(Device::list()[$newDeviceId])) {
+                parameters::getUpdate('device', Device::list()[$newDeviceId]['device']);
             }
         } else {
             $pa = parameters::getUpdate($this->argument('parameters'), $this->argument('value'));

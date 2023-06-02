@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Camera\\Device' => $baseDir . '/app/Camera/Device.php',
+    'App\\Camera\\raspistill' => $baseDir . '/app/Camera/raspistill.php',
     'App\\Commands\\Config' => $baseDir . '/app/Commands/Config.php',
     'App\\Commands\\InspireCommand' => $baseDir . '/app/Commands/InspireCommand.php',
     'App\\Commands\\Install' => $baseDir . '/app/Commands/Install.php',
