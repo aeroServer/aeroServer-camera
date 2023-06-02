@@ -5,4 +5,5 @@
 /database/database.sqlite
 /storage/app/pictures/*
 /storage/app/tmp/*
+/storage/logs/*
 /storage/app/parameters.json

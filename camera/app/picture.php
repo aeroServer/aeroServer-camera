@@ -27,7 +27,9 @@ class picture extends Model
             $picture->save();
             $picture->writeExif();
             $picture->postProcessJpeg();
-            return $picture;
+            return [true, $picture];
+        } else {
+            return [false, null];
         }
     }
 
