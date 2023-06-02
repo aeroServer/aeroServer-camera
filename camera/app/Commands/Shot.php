@@ -4,6 +4,7 @@ namespace App\Commands;
 
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
+use App\Camera\Device;
 use App\parameters;
 use App\jpeg;
 use App\picture;
@@ -36,21 +37,24 @@ class Shot extends Command
     public function handle()
     {
 
-        $dest = "". __DIR__ ."/../../storage/app/tmp/tmp.jpg";
+        
         Storage::deleteDirectory('tmp');
         if (!Storage::exists('tmp')) {
             Storage::makeDirectory('tmp');
         }
         $this->info('Clean directory if necessary.');
-        //clean::deleteOldFile('pictures', parameters::get('disk free for automatic clean', 1));
+        
+        clean::deleteOldFile('pictures');
+        
         $this->info('Get picture from camera');
-        $cmd = "libcamera-still -t 5000 -n -o $dest --autofocus-on-capture -q ".parameters::get('jpeg quality', 97)." --hdr 1";
-        shell_exec($cmd);
+        device::get('tmp/tmp.jpg');
+        
         $this->info('Post processing');
         jpeg::postProccess('tmp/tmp.jpg');
         $this->info('Save to database');
         $picture = picture::add('tmp/tmp.jpg');
-        if (!is_null(parameters::get('api server url', null))) {
+        if (!is_null(parameters::get('api server url', '')) && parameters::get('api server url', '') !== '') {
+            $this->info('Send picture to '.parameters::get('api server url', ''));
             apiServer::sendPicture($picture);
         }
 

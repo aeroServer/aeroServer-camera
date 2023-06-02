@@ -23,10 +23,26 @@ class picture extends Model
         if (Storage::exists($path)) {
             $picture = new self();
             Storage::copy($path, $picture->filename);
+            $picture->fileSize = Storage::size($picture->filename);
             $picture->save();
             $picture->writeExif();
             $picture->postProcessJpeg();
             return $picture;
+        }
+    }
+
+    public static function cleanDb()
+    {
+        $pictures = self::all();
+        foreach ($pictures as $picture) {
+            if (!Storage::exists($picture->filename)) {
+                echo "delete picture ".$picture->id."\n";
+                $picture->delete();
+            } elseif (is_null($picture->fileSize)) {
+                $picture->fileSize = Storage::size($picture->filename);
+                echo "update picture ".$picture->id."\n";
+                $picture->save();
+            }
         }
     }
 

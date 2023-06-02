@@ -438,6 +438,8 @@ class ComposerStaticInitd63a34ccbc8b837d4f96c20755722051
     );
 
     public static $classMap = array (
+        'App\\Camera\\Device' => __DIR__ . '/../..' . '/app/Camera/Device.php',
+        'App\\Camera\\raspistill' => __DIR__ . '/../..' . '/app/Camera/raspistill.php',
         'App\\Commands\\Config' => __DIR__ . '/../..' . '/app/Commands/Config.php',
         'App\\Commands\\InspireCommand' => __DIR__ . '/../..' . '/app/Commands/InspireCommand.php',
         'App\\Commands\\Install' => __DIR__ . '/../..' . '/app/Commands/Install.php',
