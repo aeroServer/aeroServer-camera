@@ -17,6 +17,8 @@ class Device
 		}
 		
 		self::$devices[parameters::get('device', 'raspistill')]::get($file);
+
+		return Storage::exists($file);
 	}
 
 	public static function list()

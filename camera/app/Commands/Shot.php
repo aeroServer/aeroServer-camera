@@ -10,6 +10,7 @@ use App\jpeg;
 use App\picture;
 use App\apiServer;
 use App\clean;
+use App\Watchdog;
 
 use Storage;
 
@@ -37,27 +38,25 @@ class Shot extends Command
     public function handle()
     {
 
-        
-        Storage::deleteDirectory('tmp');
+        Watchdog::execution(false);
+        //Storage::deleteDirectory('tmp');
         if (!Storage::exists('tmp')) {
             Storage::makeDirectory('tmp');
         }
         $this->info('Clean directory if necessary.');
         
         clean::deleteOldFile('pictures');
-        
-        $this->info('Get picture from camera');
-        device::get('tmp/tmp.jpg');
-        
-        $this->info('Post processing');
-        jpeg::postProccess('tmp/tmp.jpg');
-        $this->info('Save to database');
-        $picture = picture::add('tmp/tmp.jpg');
-        if (!is_null(parameters::get('api server url', '')) && parameters::get('api server url', '') !== '') {
-            $this->info('Send picture to '.parameters::get('api server url', ''));
-            apiServer::sendPicture($picture);
-        }
 
+        Watchdog::watch(device::get('tmp/tmp.jpg'), 'Get picture from camera');
+        Watchdog::watch(jpeg::postProccess('tmp/tmp.jpg'), 'Post processing');
+
+        $picture = picture::add('tmp/tmp.jpg');
+        Watchdog::watch($picture, 'Save to database');
+
+        if (!is_null(parameters::get('api server url', '')) && parameters::get('api server url', '') !== '') {
+            Watchdog::watch(apiServer::sendPicture($picture[1]), 'Send picture to '.parameters::get('api server url', ''));
+        }
+        Watchdog::execution(true);
     }
 
     /**

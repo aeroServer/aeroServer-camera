@@ -13,7 +13,7 @@ class apiServer
     public static function sendPicture($picture)
     {
 
-        self::post([
+        return self::post([
             'picture' => $picture->curl_file,
             'date' => date('Y-m-d H:i:s', $picture->date),
             'place' => parameters::get('place', 'generic')
@@ -26,7 +26,7 @@ class apiServer
     {
         $curl = self::getCurlObject();
         $curl->post(parameters::get('api server url', null).self::$base.$url, $array);
-        self::curlState($curl);
+        return self::curlState($curl);
     }
 
     public static function getCurlObject()
@@ -39,13 +39,13 @@ class apiServer
     public static function curlState($curl)
     {
         if ($curl->error) {
-            echo 'Error: ' . $curl->errorMessage . "\n";
+            echo 'Error apiServer: ' . $curl->errorMessage . "\n";
             if (isset($curl->response) && isset($curl->response->message)) {
                 echo $curl->response->message. "\n";
             }
-            
+            return false;
         } else {
-            echo 'Success' . "\n";
+            return true;
         }
     }
 }
