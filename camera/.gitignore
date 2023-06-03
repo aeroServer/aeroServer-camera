@@ -7,3 +7,4 @@
 /storage/app/tmp/*
 /storage/logs/*
 /storage/app/parameters.json
+/builds
