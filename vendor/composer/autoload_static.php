@@ -120,6 +120,10 @@ class ComposerStaticInitd63a34ccbc8b837d4f96c20755722051
             'Illuminate\\Bus\\' => 15,
             'Illuminate\\' => 11,
         ),
+        'H' => 
+        array (
+            'Humbug\\SelfUpdate\\' => 18,
+        ),
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
@@ -386,6 +390,10 @@ class ComposerStaticInitd63a34ccbc8b837d4f96c20755722051
         array (
             0 => __DIR__ . '/..' . '/laravel-zero/foundation/src/Illuminate',
         ),
+        'Humbug\\SelfUpdate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel-zero/phar-updater/src',
+        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
@@ -466,7 +474,6 @@ class ComposerStaticInitd63a34ccbc8b837d4f96c20755722051
         'App\\Commands\\Install' => __DIR__ . '/../..' . '/app/Commands/Install.php',
         'App\\Commands\\Selfupdate' => __DIR__ . '/../..' . '/app/Commands/Selfupdate.php',
         'App\\Commands\\Shot' => __DIR__ . '/../..' . '/app/Commands/Shot.php',
-        'App\\Commands\\Updateconfig' => __DIR__ . '/../..' . '/app/Commands/Updateconfig.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Watchdog' => __DIR__ . '/../..' . '/app/Watchdog.php',
         'App\\apiServer' => __DIR__ . '/../..' . '/app/apiServer.php',
@@ -1295,6 +1302,22 @@ class ComposerStaticInitd63a34ccbc8b837d4f96c20755722051
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'Humbug\\SelfUpdate\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/ExceptionInterface.php',
+        'Humbug\\SelfUpdate\\Exception\\FilesystemException' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/FilesystemException.php',
+        'Humbug\\SelfUpdate\\Exception\\HttpRequestException' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/HttpRequestException.php',
+        'Humbug\\SelfUpdate\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/InvalidArgumentException.php',
+        'Humbug\\SelfUpdate\\Exception\\JsonParsingException' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/JsonParsingException.php',
+        'Humbug\\SelfUpdate\\Exception\\NoSignatureException' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/NoSignatureException.php',
+        'Humbug\\SelfUpdate\\Exception\\RuntimeException' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Exception/RuntimeException.php',
+        'Humbug\\SelfUpdate\\Strategy\\DirectDownloadStrategyAbstract' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/DirectDownloadStrategyAbstract.php',
+        'Humbug\\SelfUpdate\\Strategy\\GithubStrategy' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/GithubStrategy.php',
+        'Humbug\\SelfUpdate\\Strategy\\Sha256Strategy' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/Sha256Strategy.php',
+        'Humbug\\SelfUpdate\\Strategy\\Sha512Strategy' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/Sha512Strategy.php',
+        'Humbug\\SelfUpdate\\Strategy\\ShaStrategy' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/ShaStrategy.php',
+        'Humbug\\SelfUpdate\\Strategy\\ShaStrategyAbstract' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/ShaStrategyAbstract.php',
+        'Humbug\\SelfUpdate\\Strategy\\StrategyInterface' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Strategy/StrategyInterface.php',
+        'Humbug\\SelfUpdate\\Updater' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/Updater.php',
+        'Humbug\\SelfUpdate\\VersionParser' => __DIR__ . '/..' . '/laravel-zero/phar-updater/src/VersionParser.php',
         'Illuminate\\Bus\\Batch' => __DIR__ . '/..' . '/illuminate/bus/Batch.php',
         'Illuminate\\Bus\\BatchFactory' => __DIR__ . '/..' . '/illuminate/bus/BatchFactory.php',
         'Illuminate\\Bus\\BatchRepository' => __DIR__ . '/..' . '/illuminate/bus/BatchRepository.php',
