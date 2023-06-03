@@ -1,0 +1,44 @@
+{
+    "name": "laravel-zero/phar-updater",
+    "description": "A thing to make PHAR self-updating easy and secure.",
+    "type": "library",
+    "keywords": ["phar", "self-update", "update", "humbug"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Padraic Brady",
+            "email": "padraic.brady@gmail.com",
+            "homepage": "http://blog.astrumfutura.com"
+        },
+        {
+            "name": "Owen Voke",
+            "email": "development@voke.dev",
+            "homepage": "https://voke.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "require-dev": {
+        "ext-json": "*",
+        "phpstan/phpstan": "^1.4.5",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": { "Humbug\\SelfUpdate\\": "src/" }
+    },
+    "scripts": {
+        "test:types": "phpstan analyse --ansi --memory-limit=-1",
+        "test:unit": "phpunit --colors=always",
+        "test": [
+            "@test:types",
+            "@test:unit"
+        ]
+    },
+    "conflict": {
+        "padraic/phar-updater": "*"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

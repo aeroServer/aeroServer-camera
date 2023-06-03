@@ -63,6 +63,7 @@ return array(
     'Illuminate\\Cache\\' => array($vendorDir . '/illuminate/cache'),
     'Illuminate\\Bus\\' => array($vendorDir . '/illuminate/bus'),
     'Illuminate\\' => array($vendorDir . '/laravel-zero/foundation/src/Illuminate'),
+    'Humbug\\SelfUpdate\\' => array($vendorDir . '/laravel-zero/phar-updater/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
