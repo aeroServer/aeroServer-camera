@@ -1,6 +1,6 @@
 {
-    "name": "laravel-zero/laravel-zero",
-    "description": "The Laravel Zero Framework.",
+    "name": "CymDeveloppement/aeroServer-camera",
+    "description": "Application camera.",
     "keywords": ["framework", "laravel", "laravel zero", "console", "cli"],
     "homepage": "https://laravel-zero.com",
     "type": "project",
@@ -20,12 +20,12 @@
         "illuminate/database": "^9.0",
         "illuminate/log": "^9.0",
         "laminas/laminas-text": "^2.9",
-        "laravel-zero/framework": "^9.2",
         "laravel-zero/phar-updater": "^1.2",
         "nunomaduro/termwind": "^1.14",
         "php-curl-class/php-curl-class": "^9.15"
     },
     "require-dev": {
+        "laravel-zero/framework": "^9.2",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.2",
         "mockery/mockery": "^1.4.4",
@@ -53,5 +53,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "bin": ["application"]
+    "bin": ["builds/aeroServer-camera"]
 }
