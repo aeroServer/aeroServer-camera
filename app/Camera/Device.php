@@ -8,6 +8,7 @@ class Device
 	protected static $devices = [
 		'raspistill' => raspistill::class,
 		'v4l' => v4l::class,
+		'ov5647' => ov5647::class
 	];
 
 	public static function get($file)
