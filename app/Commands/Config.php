@@ -2,10 +2,10 @@
 
 namespace App\Commands;
 
+use App\Camera\Device;
+use App\parameters;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
-use App\parameters;
-use App\Camera\Device;
 
 class Config extends Command
 {
@@ -21,7 +21,7 @@ class Config extends Command
      *
      * @var string
      */
-    protected $description = 'List, Get or Set parameters';
+    protected $description = 'List, Get or Set parameters ';
 
     /**
      * Execute the console command.
@@ -32,15 +32,15 @@ class Config extends Command
     {
         if ($this->argument('parameters') == 'all') {
             $this->displayAllParameters();
-            
+
         } elseif ($this->argument('parameters') == 'device') {
             $this->setDevice();
         } else {
             $pa = parameters::getUpdate($this->argument('parameters'), $this->argument('value'));
             if (is_null($pa)) {
-                $this->error("Le paramétre : ".$this->argument('parameters')." n'existe pas ou est protégé.");
+                $this->error("Le paramétre : " . $this->argument('parameters') . " n'existe pas ou est protégé.");
             } else {
-                $this->info($this->argument('parameters').'='.$pa);
+                $this->info($this->argument('parameters') . '=' . $pa);
             }
         }
 
@@ -49,14 +49,14 @@ class Config extends Command
 
     private function displayAllParameters()
     {
-        $this->table(['key', 'value'], array_map(fn ($x, $y) => ['key' => $x, 'value' => $y] ,  array_keys(parameters::getAll()), array_values(parameters::getAll())));
+        $this->table(['key', 'value'], array_map(fn($x, $y) => ['key' => $x, 'value' => $y], array_keys(parameters::getAll()), array_values(parameters::getAll())));
     }
 
     private function setDevice()
     {
-        $this->info('Current device : '.parameters::get('device', 'raspistill'));
+        $this->info('Current device : ' . parameters::get('device', 'raspistill'));
         $this->table(['id', 'device'], Device::list());
-        $newDeviceId = intval($this->ask('New device [0-'.(count(Device::list())-1).']?'));
+        $newDeviceId = intval($this->ask('New device [0-' . (count(Device::list()) - 1) . ']?'));
         if (isset(Device::list()[$newDeviceId])) {
             parameters::getUpdate('device', Device::list()[$newDeviceId]['device']);
         }
