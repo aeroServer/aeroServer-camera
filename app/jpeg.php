@@ -1,11 +1,12 @@
 <?php
 namespace App;
+
+use App\linuxExif;
 use Illuminate\Support\Facades\App;
 use Storage;
-use App\linuxExif;
 
 /**
- * 
+ *
  */
 class jpeg
 {
@@ -14,10 +15,10 @@ class jpeg
         return imagerotate($GD, $degrees, 0);
     }
 
-    public static function transferExif2File($srcfile, $destfile) 
-    {   
+    public static function transferExif2File($srcfile, $destfile)
+    {
         $srcData = linuxExif::read($srcfile);
-        
+
         $transfertTag = ['Make', 'Model', 'ISO', 'DateTimeOriginal', 'SubjectDistance'];
         foreach ($transfertTag as $key => $tag) {
             if (isset($srcData->$tag)) {
@@ -29,13 +30,13 @@ class jpeg
     public static function addDateTimeLoc($GD, $date)
     {
         $GD = self::drawRectangleInfo($GD, 0, 98, 100, 100);
-        $GD = self::drawText($GD, 'Date : '.date('d/m/Y H:i:s e', $date).' - '.parameters::get('place', 'generic'), 1, 99.5);
+        $GD = self::drawText($GD, 'Date : ' . date('d/m/Y H:i:s e', $date) . ' - ' . parameters::get('place', 'generic'), 1, 99.5);
         return $GD;
     }
 
     public static function addApplicationInfo($GD)
     {
-        $GD = self::drawText($GD, config('app.name').' '.config('app.version'), 80, 99.5);
+        $GD = self::drawText($GD, config('app.name') . ' ' . config('app.version'), 80, 99.5);
         return $GD;
     }
 
@@ -55,7 +56,7 @@ class jpeg
             $y1,
             $x2,
             $y2,
-            imagecolorallocate($GD, 0,0,0)
+            imagecolorallocate($GD, 0, 0, 0)
         );
         return $GD;
     }
@@ -65,11 +66,11 @@ class jpeg
 
         \imagefttext(
             $GD,
-            percentToXY(2, imagesx($GD)),
+            self::percentToXY(2, imagesx($GD)),
             0,
             self::percentToXY($xT, imagesx($GD)),
             self::percentToXY($yT, imagesy($GD)),
-            imagecolorallocate($GD, 255,255,255),
+            imagecolorallocate($GD, 255, 255, 255),
             self::getFontsPath(parameters::get('jpeg ttf font', 'JetBrainsMono/JetBrainsMono-Bold.ttf')),
             $text
         );
@@ -79,7 +80,7 @@ class jpeg
 
     public static function percentToXY($percent, $pixel)
     {
-        return intval((($pixel/100)*$percent));
+        return intval((($pixel / 100) * $percent));
     }
 
     public static function getFontsPath($font)
