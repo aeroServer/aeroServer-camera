@@ -5,7 +5,7 @@ return [
     'disks' => [
         'local' => [
             'driver' => 'local',
-            'root' => $_SERVER['HOME'].'/.config/aeroServer-camera',
+            'root' => '/DATA',
         ],
         'fonts' => [
             'driver' => 'local',
