@@ -66,7 +66,7 @@ class jpeg
 
         \imagefttext(
             $GD,
-            self::percentToXY(2, imagesx($GD)),
+            self::percentToXY(1, imagesx($GD)),
             0,
             self::percentToXY($xT, imagesx($GD)),
             self::percentToXY($yT, imagesy($GD)),
