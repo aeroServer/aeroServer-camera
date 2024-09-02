@@ -2,16 +2,14 @@
 
 namespace App\Commands;
 
+use App\apiServer;
+use App\Camera\Device;
+use App\clean;
+use App\parameters;
+use App\picture;
+use App\Watchdog;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
-use App\Camera\Device;
-use App\parameters;
-use App\jpeg;
-use App\picture;
-use App\apiServer;
-use App\clean;
-use App\Watchdog;
-
 use Storage;
 
 class Shot extends Command
@@ -41,8 +39,8 @@ class Shot extends Command
         Watchdog::execution(false);
         //Storage::deleteDirectory('tmp');
 
-        if (!is_dir($_SERVER['HOME'].'/.config/aeroServer-camera')) {
-            mkdir($_SERVER['HOME'].'/.config/aeroServer-camera');
+        if (!is_dir($_SERVER['HOME'] . '/.config/aeroServer-camera')) {
+            mkdir($_SERVER['HOME'] . '/.config/aeroServer-camera');
         }
 
         if (!Storage::exists('tmp')) {
@@ -52,10 +50,9 @@ class Shot extends Command
         if (!Storage::exists('pictures')) {
             Storage::makeDirectory('pictures');
         }
-        //dd(Storage::path('pictures'));
-        //exit();
+
         $this->info('Clean directory if necessary.');
-        
+
         clean::deleteOldFile('pictures');
 
         Watchdog::watch(device::get('tmp/tmp.jpg'), 'Get picture from camera');
@@ -65,7 +62,7 @@ class Shot extends Command
         Watchdog::watch($picture, 'Save to database');
 
         if (!is_null(parameters::get('api server url', '')) && parameters::get('api server url', '') !== '') {
-            Watchdog::watch(apiServer::sendPicture($picture[1]), 'Send picture to '.parameters::get('api server url', ''));
+            Watchdog::watch(apiServer::sendPicture($picture[1]), 'Send picture to ' . parameters::get('api server url', ''));
         }
         Watchdog::execution(true);
     }
